@@ -6,3 +6,33 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* remove paddings and margins od html tags such as divs */
+}
+
+body {
+    /* Lato comes with google fonts */
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;  /* it means it is 1,7 times bigger than the predefined line height */
+    color: #777;
+    padding: 30px;
+}
+
+.header {
+    height: 95vh; /* at any point, the size of this box is 95% of the viewport" */
+    /* background-image: linear-gradient(to right bottom, #8ae37e, #28b485), url(../img/hero.jpg); */
+    background-image: linear-gradient(
+            to right bottom,
+            rgba(126,213,111,0.8),
+            rgba(40,180,133,0.8)),
+    url(../img/hero.jpg); /* 80% of the color is visible */
+    background-size: cover; /* it will always try to fit the width of the element where it«s placed */
+    background-position: top;
+    clip-path: polygon(0 0,100% 0, 100% 75vh, 0 100%); /* to specify with part of the poligram will still be visible */
+}
+

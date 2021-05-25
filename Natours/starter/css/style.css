@@ -10,17 +10,19 @@ Dark green: #28b485
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  /* remove paddings and margins od html tags such as divs */
+    box-sizing: border-box; /* remove paddings and margins od html tags such as divs */
 }
-
+html {
+    font-size: 10px;
+}
 body {
     /* Lato comes with google fonts */
     font-family: "Lato", sans-serif;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;  /* it means it is 1,7 times bigger than the predefined line height */
+    /*font-size: 16px;*/
+    line-height: 1.7; /* it means it is 1,7 times bigger than the predefined line height */
     color: #777;
-    padding: 30px;
+    padding: 3rem;
 }
 
 .header {
@@ -28,11 +30,167 @@ body {
     /* background-image: linear-gradient(to right bottom, #8ae37e, #28b485), url(../img/hero.jpg); */
     background-image: linear-gradient(
             to right bottom,
-            rgba(126,213,111,0.8),
-            rgba(40,180,133,0.8)),
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 133, 0.8)),
     url(../img/hero.jpg); /* 80% of the color is visible */
     background-size: cover; /* it will always try to fit the width of the element where it«s placed */
     background-position: top;
-    clip-path: polygon(0 0,100% 0, 100% 75vh, 0 100%); /* to specify with part of the poligram will still be visible */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* to specify with part of the poligram will still be visible */
+    position: relative; /* the tag children will start counting their position */
 }
 
+.logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+}
+
+.logo {
+    height: 3.5rem;
+}
+
+.text-box {
+    position: absolute;
+    /*  top: 50%;
+      left: 50%;
+      background-color: red; */
+    transform: translate(-50%, -50%); /** doesnt relate to the parent. It just shifts itself  **/
+    top: 40%; /* because of the polygon (parent element) */
+    left: 50%;
+    text-align: center;
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+    backface-visibility: hidden; /** to not shake on animations **/
+    margin-bottom: 6rem;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-out; /* it will start faster and goes slower on the end */
+    /*
+    it will start after 3 sec
+     animation-delay: 3s;
+     it will repeat itself 3 times;
+     animation-iteration-count: 3;
+      it will start slower and goes faster on the end
+     animation-timing-function: ease-in;
+    */
+}
+
+
+.heading-primary-sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 2s ease-out;
+}
+
+@keyframes moveInLeft {
+    /* initial state - before it starts to move in*/
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInRight {
+    /* initial state - before it starts to move in*/
+    0% {
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+    80% {
+        transform: translateX(-1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInUp {
+    /* initial state - before it starts to move in*/
+    0% {
+        opacity: 0;
+        transform: translateY(10rem);
+    }
+    80% {
+        transform: translateY(-1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem; /* top bottom, right left */
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s; /** all properties can be animated **/
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,0.2); /* X, Y, BLUR */
+
+}
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,0.2); /* X, Y, BLUR */
+
+}
+.btn-white {
+    color: #777777;
+    background-color: white;
+}
+
+.btn::after {
+    /* to appear: content and display*/
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*** we want to have a position fixed to the button so, we make the button relative*/
+    z-index: -1; /* behind */
+    transition: all .4s;
+}
+
+.btn-white::after {
+    background-color: white;
+}
+
+.btn-white:hover::after{
+    transform: scaleX(1.4) scaleY(1.6); /* increase element size */
+    opacity: 0;
+
+}
+
+.btn-animated {
+    animation: moveInUp 2s ease-out 1s; /* 1 sec delay */
+    animation-fill-mode: backwards; /* apply the state 0% before the animation starts */
+}

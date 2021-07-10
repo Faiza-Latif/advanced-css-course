@@ -7,15 +7,17 @@ Dark green: #28b485
 
 */
 
-* {
+*, *::after, *::before {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* remove paddings and margins od html tags such as divs */
+    box-sizing: inherit;
 }
 html {
-    font-size: 10px;
+    font-size: 62.5%;
 }
 body {
+    box-sizing: border-box; /* remove paddings and margins od html tags such as divs */
+
     /* Lato comes with google fonts */
     font-family: "Lato", sans-serif;
     font-weight: 400;
@@ -148,6 +150,7 @@ body {
     border-radius: 10rem;
     transition: all .2s; /** all properties can be animated **/
     position: relative;
+    font-size: 1.6rem;
 }
 
 .btn:hover {
